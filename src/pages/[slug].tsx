@@ -8,9 +8,37 @@ import { appRouter } from "~/server/api/root";
 import { prisma } from "~/server/db";
 import { PageLayout } from "~/components/layout";
 import Image from "next/image";
+import type { FC } from "react";
+import { LoadingPage } from "~/components/loading";
+import { PostView } from "~/components/post-view";
+
+type ProfileFeedProps = {
+  userId: string;
+  username: string;
+};
 
 type PageProps = {
   username: string;
+};
+
+const ProfileFeed: FC<ProfileFeedProps> = ({ userId, username }) => {
+  const { data, isLoading } = api.posts.getPostsByUserId.useQuery({ userId });
+
+  if (isLoading) return <LoadingPage />;
+
+  if (!data || data.length === 0)
+    return (
+      <div>
+        {`${username} has not posted yet `} <span className="text-lg">🤔</span>
+      </div>
+    );
+  return (
+    <div className="flex flex-col">
+      {data.map((fullPost) => (
+        <PostView {...fullPost} key={fullPost.post.id} />
+      ))}
+    </div>
+  );
 };
 
 const ProfilePage: NextPage<PageProps> = ({ username }) => {
@@ -40,6 +68,7 @@ const ProfilePage: NextPage<PageProps> = ({ username }) => {
           data.username ?? ""
         }`}</div>
         <div className="w-full border-b border-slate-400"></div>
+        <ProfileFeed userId={data.id} username={data.username ?? "This user"} />
       </PageLayout>
     </>
   );
