@@ -2,9 +2,10 @@ import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 
 import { api } from "~/utils/api";
-import { PageLayout } from "~/components/layout";
-import { PostView } from "~/components/post-view";
+import { PageLayout } from "~/components/common/layout";
+import { PostView } from "~/components/post/post-view";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
+import Back from "~/components/common/back";
 
 type PageProps = {
   id: string;
@@ -23,7 +24,11 @@ const SinglePostPage: NextPage<PageProps> = ({ id }) => {
         <title>{`${data.post.content} - ${data.author.username}`}</title>
       </Head>
       <PageLayout>
+        <Back text="Chirp" />
         <PostView {...data} />
+        <div className="flex h-screen flex-col pt-6 text-center font-normal">
+          <p>Comments coming section coming at some point? 🤷‍♂️</p>
+        </div>
       </PageLayout>
     </>
   );

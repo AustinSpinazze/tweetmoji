@@ -1,13 +1,13 @@
 import { type NextPage } from "next";
-import { SignInButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { api } from "~/utils/api";
-import { LoadingPage, LoadingSpinner } from "~/components/loading";
-import { PageLayout } from "~/components/layout";
-import { PostView } from "~/components/post-view";
+import { LoadingPage, LoadingSpinner } from "~/components/common/loading";
+import { PageLayout } from "~/components/common/layout";
+import { PostView } from "~/components/post/post-view";
 
 const CreatePostWizard = () => {
   const [input, setInput] = useState<string>("");
@@ -102,14 +102,14 @@ const Home: NextPage = () => {
 
   return (
     <PageLayout>
-      <div className="border-b border-slate-400 p-4">
-        {!isSignedIn && (
-          <div className="flex justify-center">
-            <SignInButton />
-          </div>
-        )}
-        {isSignedIn && <CreatePostWizard />}
-      </div>
+      <h1 className="px-4 py-5 text-xl font-bold text-slate-50">
+        {isSignedIn ? "Home" : "Explore"}
+      </h1>
+      {isSignedIn && (
+        <div className="border-b border-slate-400 p-4">
+          <CreatePostWizard />
+        </div>
+      )}
       <Feed />
     </PageLayout>
   );
