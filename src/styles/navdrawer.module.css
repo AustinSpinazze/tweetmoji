@@ -1,0 +1,17 @@
+.navDrawerContainer {
+  position: fixed;
+  height: 100vh;
+  background: black;
+  color: white;
+  top: 0;
+  right: 100%;
+  width: 80%;
+  z-index: 200;
+  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+.navDrawerContainerOpen {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+}

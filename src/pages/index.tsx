@@ -102,7 +102,7 @@ const Home: NextPage = () => {
 
   return (
     <PageLayout>
-      <h1 className="px-4 py-5 text-xl font-bold text-slate-50">
+      <h1 className="hidden px-4 py-5 text-xl font-bold text-slate-50 md:block">
         {isSignedIn ? "Home" : "Explore"}
       </h1>
       {isSignedIn && (
