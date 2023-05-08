@@ -27,7 +27,7 @@ const SinglePostPage: NextPage<PageProps> = ({ id }) => {
         <Back text="Chirp" />
         <PostView {...data} />
         <div className="flex h-screen flex-col pt-6 text-center font-normal">
-          <p>Comments coming section coming at some point? 🤷‍♂️</p>
+          <p>Comments section coming at some point? 🤷‍♂️</p>
         </div>
       </PageLayout>
     </>
